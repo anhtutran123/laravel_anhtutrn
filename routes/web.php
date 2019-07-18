@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello_world','HelloWorldController@show');
+Route::get('/hello_world', 'HelloWorldController@show')->name('show');
