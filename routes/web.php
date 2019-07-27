@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/hello_world', 'HelloWorldController@show')->name('show');
+Route::resource('users', 'UsersController');
