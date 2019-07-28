@@ -29,7 +29,7 @@ class CreateUserRequest extends FormRequest
             'password_confirmation' => 'required|same:password',
             'name' => 'required|string|max:255',
             'address' => 'nullable|max:255',
-            'phone' => 'nullable|alpha_num|max:15',
+            'phone' => 'digits_between:0,15',
         ];
     }
 }
