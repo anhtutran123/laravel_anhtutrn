@@ -15,16 +15,18 @@ class User extends Model
         'name',
         'address',
         'phone',
-        'password',];
+        'password',
+        ];
     protected $perPage = 20;
     public $timestamps = true;
 
     /**
      * Get users from DB sort by email and paginated 20 each
      *
-     * @return user
+     * @return Illuminate\Pagination\Paginator
      */
-    public static function getUsersFromDB() {
+    public static function getUsersFromDB()
+    {
         return self::orderBy('mail_address', 'asc')->paginate();
     }
 
@@ -33,13 +35,9 @@ class User extends Model
      *
      * @param $input
      */
-    public static function createUser( $input ) {
-        $user = new User();
-        $user['name'] = $input['name'];
-        $user['mail_address'] = $input['mail_address'];
-        $user['password'] = Hash::make($input['password']);
-        $user['address'] = $input['address'];
-        $user['phone'] = $input['phone'];
-        $user->save();
+    public static function createUser( $input )
+    {
+        $input['password'] = Hash::make($input['password']);
+        User::create($input);
     }
 }

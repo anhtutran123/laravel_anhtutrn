@@ -15,7 +15,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::getUsersFromDB();
-        return view('users/UsersList', ['users' => $users]);
+        return view('users/index', ['users' => $users]);
     }
 
     /**
@@ -25,13 +25,13 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users/UserAdd');
+        return view('users/create');
     }
 
     /**
      * Store a newly user in storage.
      *
-     * @param  CreateUserRequest
+     * @param  CreateUserRequest $request
      * @return view
      */
     public function store(CreateUserRequest $request)
@@ -39,7 +39,6 @@ class UsersController extends Controller
         $input = $request->all();
         User::createUser($input);
         flash('Thêm mới người dùng thành công.')->success();
-        return redirect('users');
+        return redirect('index');
     }
-
 }
