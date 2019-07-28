@@ -10,37 +10,36 @@ class UsersController extends Controller
     /**
      * Display a listing of users.
      *
-     * @return UsersList
+     * @return view
      */
     public function index()
     {
         $users = User::getUsersFromDB();
-        return view('users_management.UsersList', ['users' => $users]);
+        return view('users/UsersList', ['users' => $users]);
     }
 
     /**
      * Show the form for creating a new user.
      *
-     * @return UserAdd
+     * @return view
      */
     public function create()
     {
-        return view('users_management.UserAdd');
+        return view('users/UserAdd');
     }
 
     /**
      * Store a newly user in storage.
      *
-     * @param  $request
-     * @return UsersList
+     * @param  CreateUserRequest
+     * @return view
      */
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
         User::createUser($input);
         flash('Thêm mới người dùng thành công.')->success();
-        $users = User::getUsersFromDB();
-        return view('users_management.UsersList',['users' => $users]);
+        return redirect('users');
     }
 
 }

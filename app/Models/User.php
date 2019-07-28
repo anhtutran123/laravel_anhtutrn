@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class User extends Model
 {
     use SoftDeletes;
     protected $table = 'users';
-    protected $fillable = ['mail_address','name','address','phone','password',];
+    protected $fillable = [
+        'mail_address',
+        'name',
+        'address',
+        'phone',
+        'password',];
+    protected $perPage = 20;
     public $timestamps = true;
 
     /**
@@ -21,7 +25,7 @@ class User extends Model
      * @return user
      */
     public static function getUsersFromDB() {
-        return self::orderBy('mail_address', 'asc')->paginate(20);
+        return self::orderBy('mail_address', 'asc')->paginate();
     }
 
     /**
@@ -29,17 +33,13 @@ class User extends Model
      *
      * @param $input
      */
-    public static function createUser($input) {
-        $now = Carbon::now('utc')->toDateTimeString();
-        DB::table('users')->insert([
-                'mail_address' => $input['mail_address'],
-                'name' => $input['name'],
-                'address' => $input['address'],
-                'phone' => $input['phone'],
-                'password' =>Hash::make($input['password']),
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]
-        );
+    public static function createUser( $input ) {
+        $user = new User();
+        $user['name'] = $input['name'];
+        $user['mail_address'] = $input['mail_address'];
+        $user['password'] = Hash::make($input['password']);
+        $user['address'] = $input['address'];
+        $user['phone'] = $input['phone'];
+        $user->save();
     }
 }

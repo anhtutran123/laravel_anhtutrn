@@ -25,12 +25,9 @@
 	</tr>
 	</thead>
 	<tbody>
-	@php
-		$i = 1
-	@endphp
-	@foreach($users as $user)
+	@foreach($users as $key => $user)
 		<tr>
-			<td>{{ $i++ + ($users->currentPage() - 1) * $users->perPage()}}</td>
+			<td>{{ ++$key + ($users->currentPage() - 1) * $users->perPage()}}</td>
 			<td>{{ $user -> mail_address }}</td>
 			<td>{{ $user -> name }}</td>
 			<td>{{ $user -> address }}</td>
