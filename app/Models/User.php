@@ -16,7 +16,7 @@ class User extends Model
         'address',
         'phone',
         'password',
-        ];
+    ];
     protected $perPage = 20;
     public $timestamps = true;
 

@@ -39,6 +39,6 @@ class UsersController extends Controller
         $input = $request->all();
         User::createUser($input);
         flash('Thêm mới người dùng thành công.')->success();
-        return redirect('index');
+        return redirect()->route('users.index');
     }
 }
