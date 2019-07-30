@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create User</title>
-	<link rel="stylesheet" href="/js/app.js">
-	<link rel="stylesheet" href="/css/app.css">
+<title>Create User</title>
+<link rel="stylesheet" href="/js/app.js">
+<link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 <div class="container">
