@@ -28,10 +28,10 @@
     @foreach($users as $key => $user)
         <tr>
             <td>{{ ++$key + ($users->currentPage() - 1) * $users->perPage()}}</td>
-            <td>{{ $user -> mail_address }}</td>
-            <td>{{ $user -> name }}</td>
-            <td>{{ $user -> address }}</td>
-            <td>{{ $user -> phone }}</td>
+            <td>{{ $user->mail_address }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->address }}</td>
+            <td>{{ $user->phone }}</td>
         </tr>
     @endforeach
     </tbody>

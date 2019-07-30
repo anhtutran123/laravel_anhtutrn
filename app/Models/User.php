@@ -35,7 +35,7 @@ class User extends Model
      *
      * @param $input
      */
-    public static function createUser( $input )
+    public static function createUser($input)
     {
         $input['password'] = Hash::make($input['password']);
         User::create($input);
