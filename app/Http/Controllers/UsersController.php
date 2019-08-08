@@ -79,8 +79,11 @@ class UsersController extends Controller
     public function update(StoreUserRequest $request)
     {
         $input = $request->all();
-        $this->users->updateUser($input);
-        flash('Cập nhập người dùng thành công.')->success();
+        if ($this->users->updateUser($input)) {
+            flash('Cập nhập người dùng thành công.')->success();
+        } else {
+            flash('Cập nhập người dùng thất bại.')->error();
+        }
         return redirect()->route('users.index');
     }
 }

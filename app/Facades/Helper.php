@@ -5,8 +5,10 @@ namespace App\Facades;
 class Helper
 {
     /**
+     * Return uppercase string
+     *
      * @param $name
-     * @return bool|false|mixed|string|string[]|null
+     * @return string
      */
     public static function toUpperCase($name)
     {
