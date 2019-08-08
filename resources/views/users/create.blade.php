@@ -1,6 +1,7 @@
 @extends('layouts.default')
 
 @section('title','Thêm mới')
+
 @section('create','active')
 
 @section('content')

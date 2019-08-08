@@ -11,6 +11,11 @@ class UsersController extends Controller
 {
     protected $users;
 
+    /**
+     * UsersController constructor.
+     *
+     * @param User $users
+     */
     public function __construct(User $users)
     {
         $this->users = $users;
@@ -57,7 +62,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -69,13 +74,12 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param StoreUserRequest $request
-     * @param int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function update(StoreUserRequest $request, $id)
+    public function update(StoreUserRequest $request)
     {
         $input = $request->all();
-        $this->users->updateUser($input, $id);
+        $this->users->updateUser($input);
         flash('Cập nhập người dùng thành công.')->success();
         return redirect()->route('users.index');
     }

@@ -1,22 +1,23 @@
 @extends('layouts.default')
 
 @section('title','Danh sách người dùng')
+
 @section('index','active')
 
 @section('content')
     <form class="col-auto" method="get" action="{{ route('users.index') }}">
         <div class="form-row" style="margin: 10px 0px;">
             <div class="col-auto">
-                <input type="text" class="form-control" name="mail_address" id="mail-address" placeholder="Địa chỉ email">
+                <input type="text" class="form-control" name="mail_address" id="mail-address" placeholder="Địa chỉ email" value="{{ request('mail_address') }}">
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Tên">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Tên" value="{{ request('name') }}">
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="address" id="address" placeholder="Địa chỉ">
+                <input type="text" class="form-control" name="address" id="address" placeholder="Địa chỉ" value="{{ request('address') }}">
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại">
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" value="{{ request('phone') }}">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-outline-warning">Tìm kiếm</button>
@@ -26,14 +27,14 @@
     @if(count($users))
         <table class="table table-bordered">
             <thead class="text-center" style="background-color: #ffa7f4">
-            <tr>
-                <th>STT</th>
-                <th>Địa chỉ email</th>
-                <th>Tên</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-                <th>Hành động</th>
-            </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>Địa chỉ email</th>
+                    <th>Tên</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Hành động</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($users as $key => $user)
@@ -52,7 +53,7 @@
             @endforeach
             </tbody>
         </table>
-        {!! $users->links() !!}
+        {!! $users->appends(request()->input())->links() !!}
     @else
         <p>Không có kết quả tìm kiếm</p>
     @endif

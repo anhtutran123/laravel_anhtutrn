@@ -28,18 +28,18 @@ class User extends Model
      */
     public function getUsersFromDB($input)
     {
-        $users = User::orderBy('mail_address', 'asc');
+        $users = $this->orderBy('mail_address', 'asc');
         if (isset($input['mail_address'])) {
-            $users = $users->where('mail_address', 'like', '%' . $input['mail_address'] . '%');
+            $users = $this->where('mail_address', 'like', '%' . $input['mail_address'] . '%');
         }
         if (isset($input['name'])) {
-            $users = $users->where('name', 'like', '%' . $input['name'] . '%');
+            $users = $this->where('name', 'like', '%' . $input['name'] . '%');
         }
         if (isset($input['address'])) {
-            $users = $users->where('address', 'like', '%' . $input['address'] . '%');
+            $users = $this->where('address', 'like', '%' . $input['address'] . '%');
         }
         if (isset($input['phone'])) {
-            $users = $users->where('phone', '=', $input['phone']);
+            $users = $this->where('phone', $input['phone']);
         }
         return $users->paginate();
     }
@@ -52,18 +52,18 @@ class User extends Model
     public function createUser($input)
     {
         $input['password'] = Hash::make($input['password']);
-        User::create($input);
+        $this->create($input);
     }
 
     /**
      * Find user with id
      *
      * @param $id
-     * @return  $user
+     * @return  App\Models\User
      */
     public function findUser($id)
     {
-        $user = User::find($id);
+        $user = $this->find($id);
         return $user;
     }
 
@@ -71,19 +71,16 @@ class User extends Model
      * Update user in DB
      *
      * @param $input
-     * @param $id
      */
-    public function updateUser($input, $id)
+    public function updateUser($input)
     {
-        $user = User::find($id);
         if ($input['password'] == null)
         {
-            $input['password'] = $user['password'];
+            unset($input['password']);
         }
         else {
             $input['password'] = Hash::make($input['password']);
         }
-        $user->fill($input);
-        $user->save();
+        $this->find($input['id'])->update($input);
     }
 }
