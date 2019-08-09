@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
@@ -14,7 +13,7 @@ class UsersController extends Controller
     /**
      * UsersController constructor.
      *
-     * @param User $users
+     * @param User $user
      */
     public function __construct(User $user)
     {

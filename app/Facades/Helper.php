@@ -10,7 +10,7 @@ class Helper
      * @param $name
      * @return string
      */
-    public static function toUpperCase($name)
+    public function toUpperCase($name)
     {
         return mb_strtoupper($name);
     }

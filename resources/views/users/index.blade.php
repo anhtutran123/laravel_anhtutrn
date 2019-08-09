@@ -1,8 +1,8 @@
 @extends('layouts.default')
 
-@section('title','Danh sách người dùng')
+@section('title', 'Danh sách người dùng')
 
-@section('index','active')
+@section('index', 'active')
 
 @section('content')
     <form class="col-auto" method="get" action="{{ route('users.index') }}">
@@ -41,7 +41,7 @@
                 <tr>
                     <td>{{ ++$key + ($users->currentPage() - 1) * $users->perPage()}}</td>
                     <td>{{ $user->mail_address }}</td>
-                    <td>{{ HelperFacade::toUpperCase($user->name) }}</td>
+                    <td>{{ Helper::toUpperCase($user->name) }}</td>
                     <td>{{ $user->address }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>

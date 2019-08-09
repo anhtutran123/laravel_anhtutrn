@@ -23,25 +23,25 @@ class User extends Model
     /**
      * Get users from DB sort by email and paginated 20 each
      *
-     * @param $input
+     * @param array $input
      * @return Illuminate\Pagination\Paginator
      */
     public function getUsersFromDB($input)
     {
-        $users = $this->orderBy('mail_address', 'asc');
+        $builder = $this->orderBy('mail_address', 'asc');
         if (isset($input['mail_address'])) {
-            $users = $this->where('mail_address', 'like', '%' . $input['mail_address'] . '%');
+            $builder->where('mail_address', 'like', '%' . $input['mail_address'] . '%');
         }
         if (isset($input['name'])) {
-            $users = $this->where('name', 'like', '%' . $input['name'] . '%');
+            $builder->where('name', 'like', '%' . $input['name'] . '%');
         }
         if (isset($input['address'])) {
-            $users = $this->where('address', 'like', '%' . $input['address'] . '%');
+            $builder->where('address', 'like', '%' . $input['address'] . '%');
         }
         if (isset($input['phone'])) {
-            $users = $this->where('phone', $input['phone']);
+            $builder->where('phone', $input['phone']);
         }
-        return $users->paginate();
+        return $builder->paginate();
     }
 
     /**
@@ -71,6 +71,7 @@ class User extends Model
      * Update user in DB
      *
      * @param $input
+     * @return
      */
     public function updateUser($input)
     {
