@@ -9,16 +9,16 @@ use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
-    protected $users;
+    protected $user;
 
     /**
      * UsersController constructor.
      *
      * @param User $users
      */
-    public function __construct(User $users)
+    public function __construct(User $user)
     {
-        $this->users = $users;
+        $this->user = $user;
     }
 
     /**
@@ -30,7 +30,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $input = $request->all();
-        $users = $this->users->getUsersFromDB($input);
+        $users = $this->user->getUsersFromDB($input);
         return view('users/index', ['users' => $users]);
     }
 
@@ -53,7 +53,7 @@ class UsersController extends Controller
     public function store(StoreUserRequest $request)
     {
         $input = $request->all();
-        $this->users->createUser($input);
+        $this->user->createUser($input);
         flash('Thêm mới người dùng thành công.')->success();
         return redirect()->route('users.index');
     }
@@ -66,7 +66,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->users->findUser($id);
+        $user = $this->user->findUser($id);
         return view('users/edit', ['user' => $user]);
     }
 
@@ -79,7 +79,7 @@ class UsersController extends Controller
     public function update(StoreUserRequest $request)
     {
         $input = $request->all();
-        if ($this->users->updateUser($input)) {
+        if ($this->user->updateUser($input)) {
             flash('Cập nhập người dùng thành công.')->success();
         } else {
             flash('Cập nhập người dùng thất bại.')->error();

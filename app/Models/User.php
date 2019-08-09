@@ -81,6 +81,6 @@ class User extends Model
         else {
             $input['password'] = Hash::make($input['password']);
         }
-        $this->find($input['id'])->update($input);
+        return $this->find($input['id'])->update($input);
     }
 }
