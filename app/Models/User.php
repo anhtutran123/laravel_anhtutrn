@@ -74,8 +74,7 @@ class User extends Model
      */
     public function updateUser($input)
     {
-        if ($input['password'] == null)
-        {
+        if ($input['password'] == null) {
             unset($input['password']);
         }
         else {
