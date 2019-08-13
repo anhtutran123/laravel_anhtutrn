@@ -23,11 +23,25 @@ class User extends Model
     /**
      * Get users from DB sort by email and paginated 20 each
      *
+     * @param array $input
      * @return Illuminate\Pagination\Paginator
      */
-    public static function getUsersFromDB()
+    public function getUsersFromDB($input)
     {
-        return self::orderBy('mail_address', 'asc')->paginate();
+        $builder = $this->orderBy('mail_address', 'asc');
+        if (isset($input['mail_address'])) {
+            $builder->where('mail_address', 'like', '%' . $input['mail_address'] . '%');
+        }
+        if (isset($input['name'])) {
+            $builder->where('name', 'like', '%' . $input['name'] . '%');
+        }
+        if (isset($input['address'])) {
+            $builder->where('address', 'like', '%' . $input['address'] . '%');
+        }
+        if (isset($input['phone'])) {
+            $builder->where('phone', $input['phone']);
+        }
+        return $builder->paginate();
     }
 
     /**
@@ -35,9 +49,36 @@ class User extends Model
      *
      * @param $input
      */
-    public static function createUser($input)
+    public function createUser($input)
     {
         $input['password'] = Hash::make($input['password']);
-        User::create($input);
+        $this->create($input);
+    }
+
+    /**
+     * Find user with id
+     *
+     * @param int $id
+     * @return App\Models\User
+     */
+    public function findUser($id)
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * Update user in DB
+     *
+     * @param array $input
+     * @return bool
+     */
+    public function updateUser($input)
+    {
+        if ($input['password'] == null) {
+            unset($input['password']);
+        } else {
+            $input['password'] = Hash::make($input['password']);
+        }
+        return $this->find($input['id'])->update($input);
     }
 }
