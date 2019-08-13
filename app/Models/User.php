@@ -58,20 +58,19 @@ class User extends Model
     /**
      * Find user with id
      *
-     * @param $id
-     * @return  App\Models\User
+     * @param int $id
+     * @return App\Models\User
      */
     public function findUser($id)
     {
-        $user = $this->find($id);
-        return $user;
+        return $this->find($id);
     }
 
     /**
      * Update user in DB
      *
-     * @param $input
-     * @return
+     * @param array $input
+     * @return bool
      */
     public function updateUser($input)
     {

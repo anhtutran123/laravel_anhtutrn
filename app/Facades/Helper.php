@@ -7,7 +7,7 @@ class Helper
     /**
      * Return uppercase string
      *
-     * @param $name
+     * @param string $name
      * @return string
      */
     public function toUpperCase($name)
