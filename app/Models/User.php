@@ -77,8 +77,7 @@ class User extends Model
     {
         if ($input['password'] == null) {
             unset($input['password']);
-        }
-        else {
+        } else {
             $input['password'] = Hash::make($input['password']);
         }
         return $this->find($input['id'])->update($input);
